@@ -3,11 +3,7 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
+import java.sql.*;
 
 
 public class Estudiantes extends  JFrame{
@@ -24,19 +20,37 @@ public class Estudiantes extends  JFrame{
 
     Connection connection;
     PreparedStatement ps;
+    Statement st;
+    ResultSet r;
     DefaultListModel mod = new DefaultListModel();
+
 
     public Estudiantes() {
         consultarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 conectar();
+
+            }
+        });
+        ingresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
 
-    public void listar(){
+    public void listar() throws SQLException {
         conectar();
+        lista.setModel(mod);
+        st = connection.createStatement(); // Vamos a tener internamente toda la información de la consulta
+        r = st.executeQuery("SELECT id_estudiante, nombre,apellido FROMA estudiante"); // Se mostrara la información que estamos pasando por la Query
+        mod.removeAllElements();
+        // Mostrando información en la parte visual de los tres elementos que colocamos en la Query
+        while (r.next()){
+            mod.addElement(r.getString(1) + "" + r.getString(2) + "" + r.getString(3));
+        }
     }
 
     public void insertar() throws SQLException {
