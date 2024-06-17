@@ -53,6 +53,13 @@ public class Estudiantes extends  JFrame{
             lista.setModel(mod);
             mod.removeAllElements();
             mod.addElement("¡Inserción Exitosa!");
+
+            idText.setText("");
+            nombreText.setText("");
+            apellidoText.setText("");
+            edadText.setText("");
+            telText.setText("");
+            direccionText.setText("");
         }
 
     }
