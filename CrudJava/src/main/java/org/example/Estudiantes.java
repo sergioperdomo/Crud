@@ -24,6 +24,7 @@ public class Estudiantes extends  JFrame{
 
     Connection connection;
     PreparedStatement ps;
+    DefaultListModel mod = new DefaultListModel();
 
     public Estudiantes() {
         consultarButton.addActionListener(new ActionListener() {
@@ -47,6 +48,12 @@ public class Estudiantes extends  JFrame{
         ps.setInt(4, Integer.parseInt(edadText.getText()));
         ps.setString(5, telText.getText());
         ps.setString(6, direccionText.getText());
+
+        if (ps.executeUpdate() > 0){
+            lista.setModel(mod);
+            mod.removeAllElements();
+            mod.addElement("¡Inserción Exitosa!");
+        }
 
     }
 
