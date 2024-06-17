@@ -53,17 +53,17 @@ public class Estudiantes extends  JFrame{
         conectar();
         lista.setModel(mod);
         st = connection.createStatement(); // Vamos a tener internamente toda la información de la consulta
-        r = st.executeQuery("SELECT id_estudiante, nombre,apellido FROMA estudiante"); // Se mostrara la información que estamos pasando por la Query
+        r = st.executeQuery("SELECT id_estudiante, nombre,apellido FROM estudiante"); // Se mostrara la información que estamos pasando por la Query
         mod.removeAllElements();
         // Mostrando información en la parte visual de los tres elementos que colocamos en la Query
         while (r.next()){
-            mod.addElement(r.getString(1) + "" + r.getString(2) + "" + r.getString(3));
+            mod.addElement(r.getString(1) + " " + r.getString(2) + " " + r.getString(3));
         }
     }
 
     public void insertar() throws SQLException {
         conectar();
-        ps = connection.prepareStatement("INSERT INTO estudiante VALUES (?,?,?,?,?,?)");
+        ps = connection.prepareStatement("INSERT INTO estudiante VALUES ( ?, ?, ?, ?, ?, ?)");
         ps.setInt(1, Integer.parseInt(idText.getText()));
         ps.setString(2, nombreText.getText());
         ps.setString(3, apellidoText.getText());
